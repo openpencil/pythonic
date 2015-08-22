@@ -1,2 +1,2 @@
 # pythonic
-must. learn. python.
+miscellany of python scripts
