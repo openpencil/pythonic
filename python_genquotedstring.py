@@ -5,19 +5,15 @@
 import re
 import fileinput
 
-example_input = ""
+source = ""
 for line in fileinput.input():
-    example_input += line.rstrip()
+    source += line.replace('\n', ' ')
 # print(example_input)
 
-nocomma = re.sub(r",+", "", example_input)
-noleadingtrailing = re.sub(r"^\s*(.*)\s*$", r"\1", nocomma)
-wordsonly =  re.sub(r"\s+([A-Za-z0-9]+)\s+", r'", "\1", "', noleadingtrailing)
-notrailing = re.sub(r"(.*?)\s*$", r"\1", wordsonly)
-rvector = 'c("' + notrailing + '")'
+# Convert a string of words into a vector of strings suitable for input into R
+# .strip() removes all whitespace at the start and end, including spaces, tabs, newlines and carriage returns
+# Read left to right whenever a method is used
+states = r'('+','.join(['"' + x.strip() + '"' for x in source.replace(' ', ',').split(',') if len(x) > 0])+r')'
 
-print(rvector)
-
-# gsub(",", "", example_input)
-# gsub("^\s*(.*)\s*$", "\1", example_input)
-# gsub("\s+", ",", example_input)
+# rvector = parsed.replace("'", '"')
+print(states)
