@@ -1,2 +1,2 @@
-# pythonic
-miscellany of python scripts
+# pythonic 
+A miscellany of python scripts.
